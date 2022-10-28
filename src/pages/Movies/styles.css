@@ -1,0 +1,10 @@
+.movies-list {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.movies-list a {
+    color: white;
+}
