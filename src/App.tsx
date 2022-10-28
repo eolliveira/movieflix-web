@@ -1,8 +1,15 @@
-import './assets/custom.scss';
+import "./assets/custom.scss";
 import "./App.css";
+import Login from "./pages/Login";
+import NavBar from "./components/NavBar";
 
 function App() {
-  return <h1>Teste</h1>;
+  return (
+    <>
+      <NavBar />
+      <Login />
+    </>
+  );
 }
 
 export default App;
