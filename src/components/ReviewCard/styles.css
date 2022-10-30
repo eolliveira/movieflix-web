@@ -1,0 +1,25 @@
+.review-container h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.review-container p {
+  min-width: 280px;
+  min-height: 100px;
+  border: 1px solid white;
+  color: #bdbdbd;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.review-user-container {
+  display: flex;
+  align-items: center;
+}
+
+.review-user-container img {
+  width: 15px;
+  height: 15px;
+  margin: 0 10px;
+}

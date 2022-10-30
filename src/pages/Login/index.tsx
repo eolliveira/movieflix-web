@@ -20,7 +20,7 @@ const Login = () => {
           <div className="mb-3">
             <input
               type="text"
-              className="form-control login-input"
+              className="form-control input-style"
               placeholder="Email"
               name="username"
             />
@@ -29,7 +29,7 @@ const Login = () => {
           <div className="mb-5">
             <input
               type="password"
-              className="form-control login-input"
+              className="form-control input-style"
               placeholder="Senha"
               name="password"
             />
