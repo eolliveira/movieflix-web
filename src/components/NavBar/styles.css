@@ -1,6 +1,7 @@
 .navbar-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: #ffc700;
   padding: 18px;
   height: 68px;
@@ -9,5 +10,17 @@
 .navbar-container h1 {
   color: black;
   font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-logout {
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.navbar-logout p {
+  font-size: 14px;
   font-weight: bold;
 }
