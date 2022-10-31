@@ -10,7 +10,8 @@ function App() {
     <>
       <NavBar />
       {/* <Login /> */}
-      <MovieDetails />
+      {/* <MovieDetails /> */}
+      <Login />
     </>
   );
 }

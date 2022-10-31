@@ -1,4 +1,4 @@
-import Button from "../../components/Button";
+import Button from "../../components/BasicButton";
 import ReviewCard from "../../components/ReviewCard";
 
 import "./styles.css";
