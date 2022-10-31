@@ -1,7 +1,8 @@
-import Button from "../../components/Button";
+import Button from "../../components/BasicButton";
 import ImgLogin from "../../assets/img/login-img.svg";
 
 import "./styles.css";
+import BasicButton from "../../components/BasicButton";
 
 const Login = () => {
   return (
@@ -36,7 +37,7 @@ const Login = () => {
           </div>
 
           <div className="login-btn">
-            <Button text={"fazer login"} />
+            <BasicButton text={"fazer login"} />
           </div>
         </form>
       </div>

@@ -5,7 +5,7 @@ type Props = {
 };
 
 //desestrutura text do obj Props
-const Button = ({ text }: Props) => {
+const BasicButton = ({ text }: Props) => {
   return (
     <div className="btn-container btn-primary btn">
       <h2>{text}</h2>
@@ -13,4 +13,4 @@ const Button = ({ text }: Props) => {
   );
 };
 
-export default Button;
+export default BasicButton;
