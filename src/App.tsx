@@ -1,18 +1,10 @@
 import "./assets/custom.scss";
 import "./App.css";
-import Login from "./pages/Login";
-import NavBar from "./components/NavBar";
-import Movies from "./pages/Movies";
-import MovieDetails from "./pages/MovieDetails";
+import RoutesMain from "./RoutesMain";
 
 function App() {
   return (
-    <>
-      <NavBar />
-      {/* <Login /> */}
-      {/* <MovieDetails /> */}
-      <Login />
-    </>
+      <RoutesMain />
   );
 }
 

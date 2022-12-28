@@ -3,17 +3,39 @@ import ImgLogin from "../../assets/img/login-img.svg";
 import "./styles.css";
 import BasicButton from "../../components/BasicButton";
 import { useForm } from "react-hook-form";
+import { requestBackendLogin, saveAuthData } from "../../http/requests";
+import { useHistory } from "react-router-dom";
+
+type LocationState = {
+  from: string;
+};
 
 type FormData = {
   username: string;
   password: string;
 };
 
+
 const Login = () => {
+
+  //const location = useLocation<LocationState>();
+  //const { from } = location.state || { from: { pathname: '/movies' } };
+
+  const history = useHistory();
+
   const { register, handleSubmit } = useForm<FormData>();
 
   const onSubmit = (formData: FormData) => {
-    console.log(formData);
+    requestBackendLogin(formData)
+      .then((response) => {
+        console.log(response.data);
+        saveAuthData(response.data)
+        history.push('/movies');
+        //history.replace(from);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -49,9 +71,9 @@ const Login = () => {
             />
           </div>
 
-          <div className="login-btn">
+          <button className="login-btn" type="submit">
             <BasicButton text={"fazer login"} />
-          </div>
+          </button>
         </form>
       </div>
     </div>

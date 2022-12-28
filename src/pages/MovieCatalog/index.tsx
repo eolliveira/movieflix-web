@@ -1,6 +1,6 @@
 import "./styles.css";
 
-const Movies = () => {
+const MovieCatalog = () => {
   return (
     <div className="movies-list">
       <h1>Tela listagem de filmes</h1>
@@ -14,4 +14,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default MovieCatalog;
