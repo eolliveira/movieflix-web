@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthContext";
 import { getTokenData, isAuthenticated } from "../../util/Auth";
 import history from "../../util/history";
@@ -21,9 +21,9 @@ const NavBar = () => {
     }
   }, [setAuthContextData]);
 
-  const handleLoginClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    history.replace("/");
-  };
+  // const handleLoginClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   history.replace("/");
+  // };
 
   const handleLogoutClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAuthContextData({
@@ -37,14 +37,16 @@ const NavBar = () => {
     <div className="navbar-container">
       <h1>MovieFlix</h1>
 
-      {authContextData.authenticated ? (
-        <button onClick={handleLogoutClick} className="navbar-logout">
-          <p>Sair</p>
-        </button>
+      {!isAuthenticated() ? (
+        <span></span>
       ) : (
-        <button onClick={handleLoginClick} className="navbar-logout">
-          <p>Entrar</p>
-        </button>
+        <span>
+          {authContextData.authenticated && (
+            <button onClick={handleLogoutClick} className="navbar-logout">
+              <p>Sair</p>
+            </button>
+          )}
+        </span>
       )}
     </div>
   );

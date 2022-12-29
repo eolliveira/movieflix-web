@@ -32,6 +32,7 @@ const MovieDetails = () => {
 
   const { movieId } = useParams<urlParams>();
   const [isLoading, setIsLoading] = useState(false);
+  const [saveReviewLoading, setSaveReviewLoading] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
@@ -55,6 +56,8 @@ const MovieDetails = () => {
   }, []);
 
   const handleSaveReview = (formData: FormData) => {
+    setSaveReviewLoading(true);
+
     const params: AxiosRequestConfig = {
       method: "POST",
       url: `/reviews`,
@@ -70,11 +73,13 @@ const MovieDetails = () => {
         const clone = [...reviews];
         clone.push(response.data);
         setReviews(clone);
-
         setValue("text", "");
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setSaveReviewLoading(false);
       });
   };
 
@@ -104,9 +109,13 @@ const MovieDetails = () => {
               }
             </div>
 
-            <button>
-              <Button text="Salvar avaliação" />
-            </button>
+            {saveReviewLoading ? (
+              <Loading />
+            ) : (
+              <button>
+                <Button text="Salvar avaliação" />
+              </button>
+            )}
           </form>
         </div>
       )}

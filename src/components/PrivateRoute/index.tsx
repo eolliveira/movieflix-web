@@ -4,9 +4,10 @@ import { isAuthenticated } from "../../util/Auth";
 type Props = {
   path: string;
   children: React.ReactNode;
+  exact?: boolean
 };
 
-const PrivateRoute = ({ path, children }: Props) => {
+const PrivateRoute = ({ path, children, exact }: Props) => {
   return (
     <Route
       path={path}
