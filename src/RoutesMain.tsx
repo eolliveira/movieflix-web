@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Router, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import history from "./util/history";
 import MovieCatalog from "./pages/MovieCatalog";
+import PrivateRoute from "./components/PrivateRoute";
 
 const RoutesMain = () => {
   return (
@@ -14,9 +15,9 @@ const RoutesMain = () => {
           <Login />
         </Route>
 
-        <Route path="/movies">
+        <PrivateRoute path="/movies">
           <MovieCatalog />
-        </Route>
+        </PrivateRoute>
 
         
       </Switch>

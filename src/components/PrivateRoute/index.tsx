@@ -8,7 +8,7 @@ type Props = {
   roles?: Role[];
 };
 
-const PrivateRoute = ({ path, children, roles = [] }: Props) => {
+const PrivateRoute = ({ path, children }: Props) => {
   return (
     <Route
       path={path}
@@ -16,7 +16,7 @@ const PrivateRoute = ({ path, children, roles = [] }: Props) => {
         !isAuthenticated() ? (
           <Redirect
             to={{
-              pathname: '/admin/auth/login',
+              pathname: '/',
               state: { from: location },
             }}
           />
