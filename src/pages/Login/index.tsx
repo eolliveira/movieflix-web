@@ -5,12 +5,11 @@ import BasicButton from "../../components/BasicButton";
 import { useForm } from "react-hook-form";
 import { requestBackendLogin } from "../../http/requests";
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
-import { saveAuthData } from "../../util/storege";
-
-type LocationState = {
-  from: string;
-};
+import { useContext, useState } from "react";
+import { saveAuthData } from "../../util/storage";
+import { AuthContext } from "../../AuthContext";
+import { getTokenData } from "../../util/Auth";
+import Loading from "../../components/Loading";
 
 type FormData = {
   username: string;
@@ -18,11 +17,10 @@ type FormData = {
 };
 
 const Login = () => {
-  //const location = useLocation<LocationState>();
-  //const { from } = location.state || { from: { pathname: '/movies' } };
+  const { setAuthContextData } = useContext(AuthContext);
 
   const history = useHistory();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const {
@@ -32,16 +30,27 @@ const Login = () => {
   } = useForm<FormData>();
 
   const onSubmit = (formData: FormData) => {
+
+    setIsLoading(true);
+
     requestBackendLogin(formData)
       .then((response) => {
         setError(false);
         saveAuthData(response.data);
+
+        setAuthContextData({
+          authenticated: true,
+          tokenData: getTokenData(),
+        });
+
         history.push("/movies");
-        //history.replace(from);
       })
       .catch((error) => {
         console.log(error);
         setError(true);
+      })
+      .finally(() => {
+        setIsLoading(false)
       });
   };
 
@@ -98,9 +107,13 @@ const Login = () => {
             />
           </div>
 
-          <button className="login-btn" type="submit">
-            <BasicButton text={"fazer login"} />
-          </button>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <button className="login-btn" type="submit">
+              <BasicButton text={"fazer login"} />
+            </button>
+          )}
         </form>
       </div>
     </div>

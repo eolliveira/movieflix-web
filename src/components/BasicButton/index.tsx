@@ -4,7 +4,6 @@ type Props = {
   text: String;
 };
 
-//desestrutura text do obj Props
 const BasicButton = ({ text }: Props) => {
   return (
     <div className="btn-container btn-primary btn">

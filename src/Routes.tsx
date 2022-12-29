@@ -1,11 +1,11 @@
 import NavBar from "./components/NavBar";
-import { BrowserRouter, Route, Router, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
-import history from "./util/history";
 import MovieCatalog from "./pages/MovieCatalog";
 import PrivateRoute from "./components/PrivateRoute";
+import MovieDetails from "./pages/MovieDetails";
 
-const RoutesMain = () => {
+const Routes = () => {
   return (
     //<Router history={history}>
     <BrowserRouter>
@@ -15,15 +15,17 @@ const RoutesMain = () => {
           <Login />
         </Route>
 
-        <PrivateRoute path="/movies">
+        <Route path="/movies" exact>
           <MovieCatalog />
-        </PrivateRoute>
+        </Route>
 
-        
+        <PrivateRoute path="/movies/:movieId">
+          <MovieDetails />
+        </PrivateRoute>
       </Switch>
-      </BrowserRouter>
+    </BrowserRouter>
     //</Router>
   );
 };
 
-export default RoutesMain;
+export default Routes;

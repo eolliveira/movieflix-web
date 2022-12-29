@@ -1,13 +1,6 @@
-import axios from "axios";
-import qs from "qs";
+import axios, { AxiosRequestConfig } from "axios";
 import history from "../util/history";
-import jwtDecode from "jwt-decode";
-import { TokenData } from "../types/TokenData";
-
-type LoginData = {
-  username: string;
-  password: string;
-};
+import qs from "qs";
 
 type LoginResponse = {
   access_token: string;
@@ -18,9 +11,14 @@ type LoginResponse = {
   userId: string;
 };
 
-const baseUrl = "https://movieflix-devsuperior.herokuapp.com";
-const CLIENT_ID = "myclientid";
-const CLIENT_SECRET = "myclientsecret";
+type LoginData = {
+  username: string;
+  password: string;
+};
+
+export const BASE_URL = "https://movieflix-devsuperior.herokuapp.com";
+export const CLIENT_ID = "myclientid";
+export const CLIENT_SECRET = "myclientsecret";
 
 export const requestBackendLogin = (loginData: LoginData) => {
   const headers = {
@@ -35,11 +33,26 @@ export const requestBackendLogin = (loginData: LoginData) => {
 
   return axios({
     method: "POST",
-    baseURL: baseUrl,
+    baseURL: BASE_URL,
     url: "/oauth/token",
     headers,
     data,
   });
+};
+
+export const requestBackend = (config: AxiosRequestConfig) => {
+  const headers = config.withCredentials
+    ? {
+        ...config.headers,
+        Authorization: "Bearer " + getAuthData().access_token,
+      }
+    : config.headers;
+
+  return axios({ ...config, baseURL: BASE_URL, headers });
+};
+
+export const getAuthData = () => {
+  return JSON.parse(localStorage.getItem("authKey") ?? "{}") as LoginResponse;
 };
 
 axios.interceptors.request.use(
@@ -63,20 +76,3 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export const isAuthenticated = (): boolean => {
-  const tokenData = getTokenData();
-  return tokenData && tokenData?.exp * 1000 > Date.now() ? true : false;
-};
-
-export const getTokenData = (): TokenData | undefined => {
-  try {
-    return jwtDecode(getAuthData().access_token) as TokenData;
-  } catch (error) {
-    return undefined;
-  }
-};
-
-export const getAuthData = () => {
-  return JSON.parse(localStorage.getItem("authKey") ?? "{}") as LoginResponse;
-};

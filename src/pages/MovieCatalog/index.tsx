@@ -1,15 +1,18 @@
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 const MovieCatalog = () => {
   return (
     <div className="movies-list">
       <h1>Tela listagem de filmes</h1>
-      <a className="mt-2" href="#">
+
+      <Link className="mt-2" to={`/movies/${1}`}>
         Acessar /movies/1
-      </a>
-      <a className="mt-2" href="#">
+      </Link>
+
+      <Link className="mt-2" to={`/movies/${2}`}>
         Acessar /movies/2
-      </a>
+      </Link>
     </div>
   );
 };

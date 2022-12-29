@@ -1,11 +1,9 @@
 import { Redirect, Route } from "react-router-dom";
-import { isAuthenticated } from "../../http/requests";
-import { Role } from "../../types/Role";
+import { isAuthenticated } from "../../util/Auth";
 
 type Props = {
   path: string;
   children: React.ReactNode;
-  roles?: Role[];
 };
 
 const PrivateRoute = ({ path, children }: Props) => {
@@ -16,7 +14,7 @@ const PrivateRoute = ({ path, children }: Props) => {
         !isAuthenticated() ? (
           <Redirect
             to={{
-              pathname: '/',
+              pathname: "/",
               state: { from: location },
             }}
           />
